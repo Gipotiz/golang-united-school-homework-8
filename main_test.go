@@ -2,6 +2,7 @@ package main
 
 import (
 	"bytes"
+	"fmt"
 	"io/ioutil"
 	"os"
 	"testing"
@@ -105,13 +106,14 @@ func TestListOperation(t *testing.T) {
 		t.Error(err)
 	}
 	defer file.Close()
-	
+
 	bytes, err := ioutil.ReadAll(file)
 	if err != nil {
 		t.Error(err)
 	}
 
 	result := buffer.String()
+	fmt.Println(result)
 	if result != existingItems {
 		t.Errorf("Expect output to equal %s, but got %s", existingItems, result)
 	}
