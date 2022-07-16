@@ -121,15 +121,9 @@ func Remove(args Arguments, file *os.File, writer io.Writer) error {
 			if err != nil {
 				fmt.Errorf("marshalling is failed: %v", err.Error())
 			}
-			_, err = file.Seek(0, io.SeekStart)
-			if err != nil {
-				return fmt.Errorf("%w", err)
-			}
 
-			err = file.Truncate(0)
-			if err != nil {
-				return fmt.Errorf("%w", err)
-			}
+			file.Seek(0, io.SeekStart)
+			file.Truncate(0)
 
 			file.Write(res)
 			return nil
